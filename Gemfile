@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-#gem 'devise'
+gem 'devise'
 #gem 'omniauth-facebook'
 
 
@@ -49,6 +49,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   gem 'guard'
+  gem 'hirb'
   #gem 'letter-opener'
 end
 
@@ -58,6 +59,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
