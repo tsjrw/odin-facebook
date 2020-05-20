@@ -1,0 +1,7 @@
+one:
+  post: one
+  content: "content"
+
+two:
+  post: one
+  content: "example"

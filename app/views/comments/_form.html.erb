@@ -1,0 +1,10 @@
+<%= form_with model: Comment.new, url: post_comments_path(post.id), local: true, html:{ class:"form-inline"} do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <%= hidden_field_tag :home, current_page?(root_path) %>
+
+    <div class="form-group">
+        <%= f.text_area :content, class: 'form-control' %>
+    </div>
+    <%= f.submit 'Comment', class: 'btn btn-outline-primary' %>
+<% end %>

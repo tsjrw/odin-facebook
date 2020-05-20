@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  
-  user = User.new(name: "user", email: "example@mail.com", password: "password", password_confirmation: "password")
+  fixtures :users
+  let(:user){ users(:michael) }
 
   context "creating an user" do
     it "should save an user with valid attributes" do
