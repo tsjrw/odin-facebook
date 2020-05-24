@@ -11,7 +11,7 @@
     <% end %>
     <% if @user.posts.any? %>
         <h5>Posts</h5>
-        <% @user.posts.each do |post| %>
+        <% @posts.each do |post| %>
             <%= render 'posts/post', post: post %>
         <% end %>
     <% end %>

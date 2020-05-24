@@ -6,13 +6,13 @@ let(:user){ users(:michael) }
 let(:valid_params){ { post: { content:"content" } } }
 
     context 'showing posts' do
-        it 'should not show posts to unlogged users' do
+        xit 'should not show posts to unlogged users' do
             get posts_path
             expect(response).to be_redirect
             get post_path(user.posts.first)
             expect(response).to be_redirect
         end
-        it 'should show posts when an users is logged' do
+        xit 'should show posts when an users is logged' do
             sign_in user
             get posts_path
             expect(response).to be_successful

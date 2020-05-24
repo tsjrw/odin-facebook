@@ -3,8 +3,11 @@
         <h5 class="card-subtitle mb-3 text-muted"><%= link_to post.author.name, post.author, class: 'card-link' %></h5>
         <h6 class= "card-subtitle mb-3 text-muted"><%= post.created_time %></h6>
         <p class="card-text"><%= post.content %></p>
+
+        <%= render 'like_relationships/form', post: post%>
+
+        <%= "(#{post.users_liking.count})"%>
     </div>
-    
     <%= render 'comments/comment', post: post%>
 
 </div>

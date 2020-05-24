@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
                                             post_id: params[:post_id])
 
     if @comment.save
-      flash[:success] = "The comment was successfully created!"
       if home?
         redirect_to root_path
       else
@@ -21,9 +20,5 @@ class CommentsController < ApplicationController
   private 
     def comment_params
       params.require(:comment).permit(:content)
-    end
-
-    def home?
-      params[:home] == "true" ? true : false
     end
 end
