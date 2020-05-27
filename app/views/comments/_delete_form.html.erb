@@ -1,0 +1,4 @@
+<%= form_with url: post_comment_path(comment.post.id, comment.id), method: :delete, local: true do %>
+    <%= hidden_field_tag :home, current_page?(root_path) %>
+    <%= submit_tag 'Delete comment', class: 'btn btn-outline-danger' %>
+<% end %>

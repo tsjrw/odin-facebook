@@ -8,6 +8,10 @@ class Comment < ApplicationRecord
   def created_time
     created_at.strftime('%B %d at %l:%M %p')
   end
+
+  def belongs_to?(user)
+    author_id == user.id
+  end
   
 private
 

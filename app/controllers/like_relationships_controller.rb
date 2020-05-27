@@ -3,15 +3,17 @@ class LikeRelationshipsController < ApplicationController
     def create
         post = Post.find(params[:post_id])
         unless post.is_liked_by?(current_user)
-            current_user.posts_liked << post
+            current_user.liked_posts << post
             redirection(post)
         end
     end
 
     def destroy
         post = Post.find(params[:post_id])
-        post.users_liking.delete(current_user)
-        redirection(post)
+        if post.is_liked_by?(current_user)
+            current_user.unlike(post)
+            redirection(post)
+        end
     end
 
 end

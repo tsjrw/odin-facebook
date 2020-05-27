@@ -1,10 +1,13 @@
 <ul class="list-group list-group-flush">
     <li class="list-group-item"><%= render 'comments/form', post: post %></li>
     <% if post.comments.any?%>
-        <% post.comments.each do |comment| %>
+        <% post.comments_ordered.each do |comment| %>
             <li class="list-group-item">
                 <%= link_to comment.author.name, comment.author, class: "card-link" %> 
-                <%= comment.content %></br>
+                <%= comment.content %>
+                <% if comment.belongs_to?(current_user) %>
+                    <%= render 'comments/delete_form', comment: comment %>
+                <% end %>
                 <span id="comment-date" class="text-muted"><%= comment.created_time %></span>
             </li>
         <% end %>

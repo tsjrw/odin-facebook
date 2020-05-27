@@ -17,14 +17,18 @@ RSpec.describe "Users", type: :request do
     end
 
     describe "show" do
-        it "should redirect when there is not an user logged in" do
-            get user_path(user)
-            expect(response).to be_redirect
+        context 'when logged' do
+            it "should redirect" do
+                get user_path(user)
+                expect(response).to be_redirect
+            end
         end
-        it "should render successfully whe the user is logged in" do
-            sign_in user
-            get user_path(user)
-            expect(response).to be_successful
+        context 'when logged' do
+            it "should render successfully" do
+                sign_in user
+                get user_path(user)
+                expect(response).to be_successful
+            end
         end
     end
 end

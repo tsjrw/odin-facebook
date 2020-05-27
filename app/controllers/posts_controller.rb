@@ -12,6 +12,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    post = Post.find(params[:id])
+    if post.belongs_to?(current_user)
+      current_user.posts.delete(post)
+    end
+    redirection(post)
+  end
 
   private
 

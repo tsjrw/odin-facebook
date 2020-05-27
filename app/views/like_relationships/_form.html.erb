@@ -1,11 +1,11 @@
 <% if post.users_liking.include?(current_user) %>
     <%= form_with url: post_unlike_path(post.id), method: :delete, local:true do %>
         <%= hidden_field_tag :home, current_page?(root_path) %>
-        <%= submit_tag "Unlike", class:'btn btn-outline-danger' %>
+        <%= submit_tag "Unlike", class:'btn btn-outline-secondary' %>
     <% end %>
 <% else %>
     <%= form_with url: post_likes_path(post.id), local:true do %>
         <%= hidden_field_tag :home, current_page?(root_path) %>
-        <%= submit_tag "Like", class:'btn btn-outline-primary' %>
+        <%= submit_tag "Like", class:'btn btn-outline-success' %>
     <% end %>
 <% end %>

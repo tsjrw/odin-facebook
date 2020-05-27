@@ -2,34 +2,47 @@ require 'rails_helper'
 
 RSpec.describe "Posts", type: :request do
 fixtures :users
-let(:user){ users(:michael) }
+let(:logged_user){ users(:michael) }
+let(:unlogged_user){ users(:juan) }
+let(:logged_user_post){ logged_user.posts.first }
+let(:unlogged_user_post){ unlogged_user.posts.first }
 let(:valid_params){ { post: { content:"content" } } }
 
-    context 'showing posts' do
-        xit 'should not show posts to unlogged users' do
-            get posts_path
-            expect(response).to be_redirect
-            get post_path(user.posts.first)
-            expect(response).to be_redirect
+def log_in_user
+    sign_in logged_user
+end
+
+    context 'create' do 
+        context 'when not logged' do
+            it 'should redirect' do
+                expect{ post posts_path, params: valid_params }.to change(Post, :count).by(0)
+                expect(response).to have_http_status(:redirect)
+            end
         end
-        xit 'should show posts when an users is logged' do
-            sign_in user
-            get posts_path
-            expect(response).to be_successful
-            get post_path(user.posts.first)
-            expect(response).to be_successful
+        context 'when logged' do
+            it 'should create a post for the current user' do
+                log_in_user
+                expect{ post posts_path, params: valid_params }.to change(logged_user.posts, :count).by(1)
+            end
         end
     end
 
-    context 'creating posts' do 
-        it 'should not create a post when an user is not logged' do
-            expect{ post posts_path, params: valid_params }.to change{Post.count}.by(0)
-            expect(response).to have_http_status(:redirect)
+    context 'delete' do 
+        context 'when not logged' do
+            it 'should redirect' do
+                expect{ delete post_path(logged_user_post.id) }.to change(logged_user.posts, :count).by(0)
+                expect(response).to have_http_status(:redirect)
+            end
         end
-        it 'should create a post if an user is logged' do
-            sign_in user
-            expect{ post posts_path, params: valid_params }.to change{Post.count}.by(1)
-            expect(response).to have_http_status(:redirect)
+        context 'when logged' do
+            it 'should not delete a post from another user' do
+                log_in_user
+                expect{ delete post_path(unlogged_user_post.id) }.to change(unlogged_user.posts, :count).by(0)
+            end
+            it 'should delete a post from the current user' do
+                log_in_user
+                expect{ delete post_path(logged_user_post.id) }.to change(logged_user.posts, :count).by(-1)
+            end
         end
     end
 

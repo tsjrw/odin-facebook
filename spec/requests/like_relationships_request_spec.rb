@@ -31,7 +31,7 @@ RSpec.describe "LikeRelationships", type: :request do
             end
             it 'should not increase the number of likes of another user' do
                 sign_in user_1
-                expect{ post post_likes_path(user_post.id) }.to change(user_2.posts_liked, :count).by(0)
+                expect{ post post_likes_path(user_post.id) }.to change(user_2.liked_posts, :count).by(0)
             end
         end
         
@@ -48,12 +48,16 @@ RSpec.describe "LikeRelationships", type: :request do
             it 'should not decrease the number of likes of another user' do
                 user_likes_post
                 sign_in user_1
-                expect{ delete post_unlike_path(user_post.id) }.to change(user_2.posts_liked, :count).by(0)
+                expect{ delete post_unlike_path(user_post.id) }.to change(user_2.liked_posts, :count).by(0)
+            end
+            it 'should not do anything if the user does not already like the post' do
+                sign_in user_1
+                expect{ delete post_unlike_path(user_post.id) }.to change(user_post.users_liking, :count).by(0)
             end
             it 'should decrease the number of likes of the current user' do
                 sign_in user_1
                 post post_likes_path(user_post.id)
-                expect{ delete post_unlike_path(user_post.id) }.to change(user_1.posts_liked, :count).by(-1)
+                expect{ delete post_unlike_path(user_post.id) }.to change(user_1.liked_posts, :count).by(-1)
             end
         end
     end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  fixtures :users, :posts
+  fixtures :users
 
 
   let(:user){ users(:michael) }

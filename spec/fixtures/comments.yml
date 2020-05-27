@@ -1,7 +1,9 @@
 one:
   post: one
+  author: juan
   content: "content"
 
 two:
   post: one
+  author: michael
   content: "example"
