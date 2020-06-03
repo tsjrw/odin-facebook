@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   belongs_to :author, class_name: :User
   has_many :comments, dependent: :destroy
 
-  has_many :like_relationships, foreign_key: 'post_id', dependent: :destroy
+  has_many :like_relationships, dependent: :destroy
   has_many :users_liking, through: :like_relationships, source: :user
 
   validates :content, presence: true, length: { maximum: 1000}

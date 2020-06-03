@@ -3,6 +3,9 @@
 <aside class="col-md-2">
     <section>
         <h1><%= @user.name %></h1>
+        <% unless @user == current_user %>
+            <%= render 'friendships/form', other_user: @user %>
+        <% end %>
     </section>
 </aside>
 <section class="col-md-8">

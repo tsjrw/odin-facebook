@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
   def home
-    @posts = Post.ordered
+    @posts = friends_posts
   end
 end

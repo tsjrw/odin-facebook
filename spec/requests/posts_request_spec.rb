@@ -7,6 +7,7 @@ let(:unlogged_user){ users(:juan) }
 let(:logged_user_post){ logged_user.posts.first }
 let(:unlogged_user_post){ unlogged_user.posts.first }
 let(:valid_params){ { post: { content:"content" } } }
+let(:referrer){ {'HTTP_REFERER' => "/"} }
 
 def log_in_user
     sign_in logged_user
@@ -37,11 +38,11 @@ end
         context 'when logged' do
             it 'should not delete a post from another user' do
                 log_in_user
-                expect{ delete post_path(unlogged_user_post.id) }.to change(unlogged_user.posts, :count).by(0)
+                expect{ delete post_path(unlogged_user_post.id), headers: referrer }.to change(unlogged_user.posts, :count).by(0)
             end
             it 'should delete a post from the current user' do
                 log_in_user
-                expect{ delete post_path(logged_user_post.id) }.to change(logged_user.posts, :count).by(-1)
+                expect{ delete post_path(logged_user_post.id), headers: referrer }.to change(logged_user.posts, :count).by(-1)
             end
         end
     end

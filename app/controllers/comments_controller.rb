@@ -5,11 +5,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(content: comment_params[:content], 
                                             post_id: params[:post_id])
     if @comment.save
-      if home?
-        redirect_to root_path
-      else
-        redirect_to @comment.post.author
-      end
+      redirect_to request.referrer
     else
       flash.now[:danger] = "Some errors have occurred writing the comment. Try again."
       render 'new'
@@ -21,7 +17,7 @@ class CommentsController < ApplicationController
     if comment.belongs_to?(current_user)
       post = comment.post
       comment.delete
-      redirection(comment.post)
+      redirect_to request.referrer
     end
   end
 

@@ -4,7 +4,8 @@ class LikeRelationshipsController < ApplicationController
         post = Post.find(params[:post_id])
         unless post.is_liked_by?(current_user)
             current_user.liked_posts << post
-            redirection(post)
+            redirect_to request.referrer
+
         end
     end
 
@@ -12,7 +13,7 @@ class LikeRelationshipsController < ApplicationController
         post = Post.find(params[:post_id])
         if post.is_liked_by?(current_user)
             current_user.unlike(post)
-            redirection(post)
+            redirect_to request.referrer
         end
     end
 

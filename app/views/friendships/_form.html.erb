@@ -1,0 +1,14 @@
+<% if current_user.friends.include?(other_user) %>
+    <%= link_to 'Eliminate friend', user_friendship_path(other_user.id), method: :delete, class: 'btn btn-outline-danger' %>
+<% else %>
+    <% if current_user.requested_users.include?(other_user) %>
+        <%= submit_tag 'Friend request sent', class: 'btn btn-outline-secondary' %>
+    <% else %>
+        <% if current_user.friend_requests.include?(other_user) %>
+            <%= link_to 'Accept friend', user_friendship_path(other_user.id), method: :put, class: 'btn btn-outline-success' %>
+            <%= link_to 'Decline request', user_friendship_path(other_user.id), method: :delete, class: 'btn btn-outline-danger' %>
+        <% else %>
+            <%= link_to 'Add friend', user_friendships_path(other_user.id), method: :post, class: 'btn btn-outline-success' %>
+        <% end %>
+    <% end %>
+<% end %>

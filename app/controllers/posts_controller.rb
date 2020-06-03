@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     if post.belongs_to?(current_user)
       current_user.posts.delete(post)
     end
-    redirection(post)
+    redirect_to request.referrer
   end
 
   private
