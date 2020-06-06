@@ -1,9 +1,16 @@
 <div class="row">
 
-<aside class="col-md-2">
+<aside class="col-md-3">
     <section>
-        <h1><%= @user.name %></h1>
-        <% unless @user == current_user %>
+        <h1>
+            <%= image_tag url_for(@user.avatar), size: '50x50', class: 'profile_image' if @user.avatar.attached? %>
+            <%= @user.name %>
+        </h1>
+        <h5> Friends <%= "(#{current_user.friends.count})" %> </h5></br>
+
+        <% if @user == current_user %>
+            <%= link_to 'Edit Profile', edit_user_registration_path %>
+        <% else %>
             <%= render 'friendships/form', other_user: @user %>
         <% end %>
     </section>

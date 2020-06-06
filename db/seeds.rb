@@ -10,6 +10,15 @@ User.create(name: "Test", email: "test@mail.com", password: "password", password
     user.save
 end
 
+User.all.each do |user|
+    user.avatar.attach(
+        #io: open(Faker::Avatar.image(slug: "#{user.id}", size: "50x50", format: "jpg")), 
+        io: open(Faker::LoremFlickr.image(size: "300x300", search_terms: ['cats'])),
+        filename: "#{user.name.sub(" ", "_")}_avatar",
+        content_type: 'image'
+    )
+end
+
 20.times do
     post = Post.new
     post.author_id = User.pluck(:id).sample
@@ -17,15 +26,11 @@ end
     post.save
 end
 
-10.times do
-    i = 0
-    loop do
-        break if User.first.sent_requests.build(user_id: User.pluck(:id).sample).save || i == 50
-        i += 1
-    end
-    i = 0
-    loop do
-        break if User.first.received_requests.build(friend_id: User.pluck(:id).sample).save || i == 50
-        i += 1
-    end
+
+until User.first.sent_requests.count == 3 do
+    User.first.sent_requests.build(user_id: User.pluck(:id).sample).save
+end
+
+until User.first.received_requests.count == 3 do
+    User.first.received_requests.build(friend_id: User.pluck(:id).sample).save
 end

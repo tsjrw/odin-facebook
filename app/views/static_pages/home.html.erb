@@ -2,9 +2,11 @@
     <%= render 'shared/sign_up' %>
 <% else %>
     <div class="container w-75">
-        <h5>Posts</h5>
-        <% @posts.each do |post| %>
-            <%= render 'posts/post', post: post %>
+        <% unless @post.nil? %>
+            <h5>Posts</h5>
+            <% @posts.each do |post| %>
+                <%= render 'posts/post', post: post %>
+            <% end %>
         <% end %>
     </div>
 <%end%>

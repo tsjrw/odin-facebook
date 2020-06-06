@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :received_requests, class_name: :Friendship, foreign_key: 'user_id', dependent: :destroy
   has_many :friend_requests, through: :received_requests, source: :friend
 
-
+  has_one_attached :avatar
+  
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 

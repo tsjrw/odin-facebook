@@ -2,6 +2,7 @@
     <% @users.each do |user| %>
         <div class="card my-2">
             <div class="card-body">
+                <%= avatar_icon(user, 30) %>
                 <%= link_to user.name, user, class: "card-link" %>
                 <%= render 'friendships/form', other_user: user %>
             </div>

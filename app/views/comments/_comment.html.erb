@@ -3,6 +3,7 @@
     <% if post.comments.any?%>
         <% post.comments_ordered.each do |comment| %>
             <li class="list-group-item">
+                <%= avatar_icon(comment.author, 25 )%>
                 <%= link_to comment.author.name, comment.author, class: "card-link" %> 
                 <%= comment.content %>
                 <% if comment.belongs_to?(current_user) %>
