@@ -53,6 +53,7 @@ group :development do
 
   gem 'guard'
   gem 'hirb'
+  gem 'letter_opener_web'
 
   #gem 'letter-opener'
 end
