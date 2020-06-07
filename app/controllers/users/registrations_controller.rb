@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |resource|
-      UserMailer.with(user: resource).welcome_email.deliver_now
+      UserMailer.with(user: resource).welcome_email.deliver_now if resource.persisted?
     end
   end
 

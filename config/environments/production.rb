@@ -72,7 +72,8 @@ Rails.application.configure do
     :user_name      => Rails.application.credentials.sendgrid[:user_name],
     :password       => Rails.application.credentials.sendgrid[:password],
     :domain         => 'heroku.com',
-    :enable_starttls_auto => true
+    :enable_starttls_auto => true,
+    tls: true
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
