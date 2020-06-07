@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'mini_magick'
 gem 'devise'
-#gem 'omniauth-facebook'
+gem 'omniauth-facebook'
 gem "aws-sdk-s3", require: false
 
 gem 'bootstrap-sass'

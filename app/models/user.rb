@@ -14,7 +14,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
   
   devise :database_authenticatable, :registerable,
-         :rememberable, :validatable
+         :rememberable, :validatable, :omniauthable, 
+         omniauth_providers: %i[facebook]
 
   validates :name, presence: true, length: { minimum: 2}
 
@@ -30,4 +31,19 @@ class User < ApplicationRecord
     User.find(friends_ids)
   end
 
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.name = auth.info.name  
+      user.avatar.attach(
+                          io: open(auth.info.image),
+                          filename: "#{user.uid}_avatar",
+                          content_type: 'image'
+                        ) 
+      # If you are using confirmable and the provider(s) you use validate emails, 
+      # uncomment the line below to skip the confirmation emails.
+      # user.skip_confirmation!
+    end
+  end
 end

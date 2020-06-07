@@ -2,7 +2,7 @@
     <%= render 'shared/sign_up' %>
 <% else %>
     <div class="container w-75">
-        <% unless @post.nil? %>
+        <% unless @posts.empty? %>
             <h5>Posts</h5>
             <% @posts.each do |post| %>
                 <%= render 'posts/post', post: post %>
