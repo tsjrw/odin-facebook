@@ -41,9 +41,6 @@ class User < ApplicationRecord
                           filename: "#{user.uid}_avatar",
                           content_type: 'image'
                         ) 
-      # If you are using confirmable and the provider(s) you use validate emails, 
-      # uncomment the line below to skip the confirmation emails.
-      # user.skip_confirmation!
     end
   end
 end

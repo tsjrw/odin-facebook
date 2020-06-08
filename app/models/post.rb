@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   has_many :like_relationships, dependent: :destroy
   has_many :users_liking, through: :like_relationships, source: :user
 
+  has_one_attached :photo
+
   validates :content, presence: true, length: { maximum: 1000}
 
   def created_time

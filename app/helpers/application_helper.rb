@@ -21,6 +21,6 @@ module ApplicationHelper
     end
 
     def avatar_icon(user, size)
-        image_tag url_for(user.avatar), size: "#{size}x#{size}", class: 'profile_image' if current_user.avatar.attached?
+        image_tag url_for(user.avatar), size: "#{size}x#{size}", class: 'profile_image' if user.avatar.attached?
     end
 end

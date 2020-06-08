@@ -1,10 +1,11 @@
 <h4>Create Post</h4>
 <%=form_with model: Post.new, url: posts_path, local: true do |f|%>
     <%= render 'shared/error_messages', object: f.object %>
-    
     <div class="form-group">
         <%= f.text_area :content, rows: '3', class: "form-control" %>
     </div>
-
+    <div class="from-group">
+        <%= f.file_field :photo, class: "form-control" %>
+    </div>
     <%= f.submit 'Create', class: 'btn btn-outline-primary'%>
 <%end%>

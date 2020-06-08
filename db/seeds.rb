@@ -12,8 +12,7 @@ end
 
 User.all.each do |user|
     user.avatar.attach(
-        #io: open(Faker::Avatar.image(slug: "#{user.id}", size: "50x50", format: "jpg")), 
-        io: open(Faker::LoremFlickr.image(size: "300x300", search_terms: ['cats'])),
+        io: open(Faker::LoremFlickr.image(size: "300x300", search_terms: ['people'])),
         filename: "#{user.name.sub(" ", "_")}_avatar",
         content_type: 'image'
     )
@@ -24,6 +23,15 @@ end
     post.author_id = User.pluck(:id).sample
     post.content = Faker::Hipster.sentence
     post.save
+end
+
+5.times do
+    post = Post.take
+    post.photo.attach(
+        io: open(Faker::LoremFlickr.image(search_terms: ['cats'])),
+        filename: "post_#{post.id}_avatar",
+        content_type: 'image'
+    )
 end
 
 
