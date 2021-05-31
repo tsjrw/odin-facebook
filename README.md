@@ -7,3 +7,6 @@ The users will be able to send frienship request and accept them. Also, they can
 A user could sign-in with his email or with a real Facebook account and uloap a profile image.
 
 The timeline will show up all the recent posts fom the current user like Facebook.
+
+[Got to the app.](https://pacific-reef-58744.herokuapp.com/)
+**WARNING!: The application is not working as expected due to it is not currently maintained**
